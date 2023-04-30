@@ -6,7 +6,13 @@
   "author": "Lais Frigerio <laaisfrigerio@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev ./src/server.ts",
+    "build": "tsc -p .",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn ./src/server.ts",
+    "docker:build": "docker build -t boilerplate-docker-node-typescript-express-jest --target prod .",
+    "docker:build-test": "docker build -t boilerplate-docker-node-typescript-express-jest-test --target test .",
+    "docker:run": "docker run -p 127.0.0.1:49131:3333 -d boilerplate-docker-node-typescript-express-jest",
+    "docker:test": "docker run -e CI=true boilerplate-docker-node-typescript-express-jest-test",
+    "prod:start": "node build/src/server.js",
     "test": "jest"
   },
   "devDependencies": {
