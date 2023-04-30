@@ -11,13 +11,10 @@ COPY src ./src
 
 FROM base as test
 
-COPY jest.config.ts ./
+RUN npm install \
+&& npm run build
 
-COPY setupTest.ts ./
-
-RUN npm install
-
-CMD [ "npm", "run", "test", "./src" ]
+CMD [ "npm", "run", "test", "./build/src" ]
 
 FROM base as prod
 
